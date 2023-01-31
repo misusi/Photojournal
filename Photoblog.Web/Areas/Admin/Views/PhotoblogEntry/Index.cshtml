@@ -1,0 +1,25 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary text-end" asp-action="Create">Create New Entry</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered table-striped" id="photoblogTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Photo List</th>
+                        @*<th></th>*@
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/photoblogEntry.js"></script>
+}

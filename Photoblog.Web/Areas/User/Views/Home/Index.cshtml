@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+
+}
+@*
+@section head
+    {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+}
+*@
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="container style=" width:100%;"">
+    <div class="row">
+        <div class="col">
+        </div>
+    </div>
+</div>
+<div style="height:600px;width:100%;" id="map"></div>
+
+@section Scripts{
+    <script>
+        // Create Map
+        var map = L.map('map').setView([42.1443888, -124.3550473], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Add default marker
+        //L.marker([42.1443888, -124.3550473]).addTo(map)
+            //.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            //.openPopup();
+        
+            // Allow creating marker
+        var marker;
+        map.on('click', function (e) {
+            if (marker)
+                map.removeLayer(marker);
+            console.log(e.latlng); // e is an event object (MouseEvent in this case)
+            marker = L.marker(e.latlng).addTo(map);
+        });
+
+        // Add search box
+    </script>
+}
