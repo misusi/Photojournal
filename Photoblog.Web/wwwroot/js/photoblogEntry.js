@@ -30,9 +30,9 @@ function loadDataTable() {
                     var htmlToReturn = "";
                     for (let i = 0; i < data.length; i++) {
                         htmlToReturn += `<div class="row">`;
-                        htmlToReturn += `   <div style="object-fit:cover;overflow-x:hidden;height:${maxRowHeight}px;scrollbar-width:thin;width:100%;" 
+                        htmlToReturn += `   <div style="overflow-x:hidden;height:${maxRowHeight}px;scrollbar-width:thin;width:100%;" 
                                              class="col d-flex mx-2">`;
-                        htmlToReturn += `       <img style="height: 200px;" src="${data[i]}"\>`;
+                        htmlToReturn += `       <img style="object-fit:cover;" src="${data[i]}"\>`;
                         htmlToReturn += "   <div/>";
                         htmlToReturn += "<div/>";
                     }

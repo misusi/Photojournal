@@ -15,6 +15,7 @@ namespace Photoblog.Models
         public int Id { get; set; }
         //public int PhotoSetId { get; set;  }
         //[ForeignKey("PhotoSetId")]
+        public DateTime DateCreated { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
         public ICollection<Photo> PhotoList { get; set; }

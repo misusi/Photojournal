@@ -33,7 +33,7 @@ namespace Photoblog.Web.Areas.Admin.Controllers
             PhotoblogEntry newPhotoblogEntry = new();
             newPhotoblogEntry.Title = photoblogEntryViewModel.PhotoSetTitle;
             newPhotoblogEntry.Description = photoblogEntryViewModel.PhotoSetDescription;
-
+            newPhotoblogEntry.DateCreated = DateTime.Now;
             // create new photo object for each image url included
             foreach (var file in postedFiles)
             {
@@ -43,7 +43,8 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                     Description = "", // TODO: Have one desc. for set or also per photo?
                     DateTaken = photoblogEntryViewModel.PhotoSetDate,
                     LocationTakenLat = photoblogEntryViewModel.PhotoLocationLat,
-                    LocationTakenLng = photoblogEntryViewModel.PhotoLocationLng
+                    LocationTakenLng = photoblogEntryViewModel.PhotoLocationLng,
+                    DateUploaded = newPhotoblogEntry.DateCreated
                 };
                 newPhotoblogEntry.PhotoList.Add(newPhotoToAdd);
 
