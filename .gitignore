@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-Photoblog.Web/wwwroot/images/photos/
+Photojournal.Web/wwwroot/images/photos/
 
 # User-specific files
 *.rsuser
