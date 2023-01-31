@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Photoblog.Models.ViewModels
         public string PhotoSetDescription { get; set; }
         public DateTime? PhotoSetDate { get; set; }
         // Information for individual photos
+        [ValidateNever]
         public List<string> PhotoUrlList { get; set; }
         public float? PhotoLocationLat { get; set; }
         public float? PhotoLocationLng { get; set; }

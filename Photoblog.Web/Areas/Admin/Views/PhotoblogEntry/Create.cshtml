@@ -3,28 +3,53 @@
     <div class="row">
         <!--form inputs-->
         <form method="post" enctype="multipart/form-data">
+            @*<div class="text-danger" asp-validation-summary="All">
+                <span>Please correct the following errors</span>
+            </div>*@
             <div class="col-6">
                 <div class="form-group">
                     <label class="form-label mt-4">Title for this set of photos</label>
                     <input asp-for="PhotoSetTitle" type="text" class="form-control">
+                    <span class="text-danger" asp-validation-for="PhotoSetTitle"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">Description for this set of photos.</label>
                     <input asp-for="PhotoSetDescription" type="text" class="form-control">
+                    <span class="text-danger" asp-validation-for="PhotoSetDescription"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">When was this set taken?</label>
-                    <input asp-for="PhotoSetDate" type="datetime" class="form-control">
+                    <input asp-for="PhotoSetDate" type="datetime-local" class="form-control">
+                    <span class="text-danger" asp-validation-for="PhotoSetDate"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">Select photos to include in this set</label>
-                    <input class="form-control" multiple type="file" name="postedFiles">
+                    <input class="form-control" multiple type="file" id="uploadBox" name="postedFiles">
                 </div>
-                <button class="btn btn-success mt-3" type="submit">Upload PhotoSet</button>
             </div>
+            <button class="btn btn-success mt-3" type="submit" onclick="return ValidateInput()">Upload PhotoSet</button>
         </form>
         <!--display image thumbnails if they were selected-->
         <div class="col-6">
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function ValidateInput(){
+            if(document.getElementById("uploadBox").value == ""){
+                Swal.fire({
+                    title: 'Oops...',
+                    text: 'Please upload an image!',
+                    icon: 'error'
+                    //confirmButtonText: 'Cool'
+                })
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
