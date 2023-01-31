@@ -29,12 +29,9 @@ function loadDataTable() {
                 "render": function (data) {
                     var htmlToReturn = "";
                     for (let i = 0; i < data.length; i++) {
-                        htmlToReturn += `<div class="row">`;
-                        htmlToReturn += `   <div style="overflow-x:hidden;height:${maxRowHeight}px;scrollbar-width:thin;width:100%;" 
-                                             class="col d-flex mx-2">`;
-                        htmlToReturn += `       <img style="object-fit:cover;" src="${data[i]}"\>`;
+                        htmlToReturn += `   <div style="overflow-x:ignore;scrollbar-width:thin;" class="mx-2 d-flex">`;
+                        htmlToReturn += `       <img style="height:${maxRowHeight}px" src="${data[i]}"\>`;
                         htmlToReturn += "   <div/>";
-                        htmlToReturn += "<div/>";
                     }
                     return `
                         ${htmlToReturn}

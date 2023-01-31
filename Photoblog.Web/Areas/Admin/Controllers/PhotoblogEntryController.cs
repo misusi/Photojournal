@@ -27,8 +27,11 @@ namespace Photoblog.Web.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(100000000000)]
         public IActionResult Create(PhotoblogEntryViewModel photoblogEntryViewModel, List<IFormFile> postedFiles)
         {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            var uploads = Path.Combine(wwwRootPath, @"images\photos");
             // create new photoblog entry from data in view model
             PhotoblogEntry newPhotoblogEntry = new();
             newPhotoblogEntry.Title = photoblogEntryViewModel.PhotoSetTitle;
@@ -48,36 +51,26 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                 };
                 newPhotoblogEntry.PhotoList.Add(newPhotoToAdd);
 
-                //// also copy image to project folder
-                //string destImageDirPathLocal = @"\images\reviews";
-                //string destImageDirPathFull = Path.Combine(_webEnvironment.WebRootPath, destImageDirPathLocal);
-                //if (!System.IO.Directory.Exists(destImageDirPathFull))
-                //{
-                //    System.IO.Directory.CreateDirectory(destImageDirPathFull);
-                //}
-
-                //string imageExt = Path.GetExtension(newPhotoblogEntry.PhotoList.Last().ImageUrl);
-                //string destImageFileName = Guid.NewGuid().ToString() + imageExt;
-                //string srcImagePathFull = Path.GetFullPath(newPhotoblogEntry.PhotoList.Last().ImageUrl);
-                //string finalImagePath = Path.Combine(destImageDirPathFull, destImageFileName);
-                //for (int i = 0; i < postedFiles.Count; i++)
-                //{
-                //    System.IO.File.Copy(postedFiles[i].FileName, finalImagePath);
-
-                //}
-
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                var uploads = Path.Combine(wwwRootPath, @"images\photos");
                 string fileName = Guid.NewGuid().ToString();
                 var extension = Path.GetExtension(file.FileName);
+
 
                 using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                 {
                     file.CopyTo(fileStreams);
                 }
-                newPhotoblogEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + extension;
 
-                //newPhotoblogEntry.PhotoList.Last().ImageUrl = Path.Combine(uploads, filename + extension;
+                // convert image if cr2 + change path
+                if (extension.ToLower() == ".cr2")
+                {
+                    CR2ToJPG.Converter.ConvertImage(Path.Combine(uploads, fileName + extension), Path.Combine(uploads));
+                    newPhotoblogEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + ".jpg";
+                }
+                else
+                {
+                    newPhotoblogEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + extension;
+                }
+
             }
             
             // add to db
