@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Photoblog.Data;
 using Photoblog.Data.Repository.IRepository;
 using Photoblog.Models;
@@ -9,9 +10,11 @@ namespace Photoblog.Web.Areas.Admin.Controllers
     public class PhotoblogEntryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PhotoblogEntryController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public PhotoblogEntryController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -24,7 +27,7 @@ namespace Photoblog.Web.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PhotoblogEntryViewModel photoblogEntryViewModel)
+        public IActionResult Create(PhotoblogEntryViewModel photoblogEntryViewModel, List<IFormFile> postedFiles)
         {
             // create new photoblog entry from data in view model
             PhotoblogEntry newPhotoblogEntry = new();
@@ -32,11 +35,11 @@ namespace Photoblog.Web.Areas.Admin.Controllers
             newPhotoblogEntry.Description = photoblogEntryViewModel.PhotoSetDescription;
 
             // create new photo object for each image url included
-            foreach (string imgUrl in photoblogEntryViewModel.PhotoUrlList)
+            foreach (var file in postedFiles)
             {
                 Photo newPhotoToAdd = new Photo
                 {
-                    ImageUrl = imgUrl,
+                    ImageUrl = file.FileName,
                     Description = "", // TODO: Have one desc. for set or also per photo?
                     DateTaken = photoblogEntryViewModel.PhotoSetDate,
                     LocationTakenLat = photoblogEntryViewModel.PhotoLocationLat,
@@ -44,10 +47,39 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                 };
                 newPhotoblogEntry.PhotoList.Add(newPhotoToAdd);
 
-                // upload those photos to the db first
-                //_unitOfWork.Photo.Add(newPhotoToAdd);
+                //// also copy image to project folder
+                //string destImageDirPathLocal = @"\images\reviews";
+                //string destImageDirPathFull = Path.Combine(_webEnvironment.WebRootPath, destImageDirPathLocal);
+                //if (!System.IO.Directory.Exists(destImageDirPathFull))
+                //{
+                //    System.IO.Directory.CreateDirectory(destImageDirPathFull);
+                //}
+
+                //string imageExt = Path.GetExtension(newPhotoblogEntry.PhotoList.Last().ImageUrl);
+                //string destImageFileName = Guid.NewGuid().ToString() + imageExt;
+                //string srcImagePathFull = Path.GetFullPath(newPhotoblogEntry.PhotoList.Last().ImageUrl);
+                //string finalImagePath = Path.Combine(destImageDirPathFull, destImageFileName);
+                //for (int i = 0; i < postedFiles.Count; i++)
+                //{
+                //    System.IO.File.Copy(postedFiles[i].FileName, finalImagePath);
+
+                //}
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                var uploads = Path.Combine(wwwRootPath, @"images\photos");
+                string fileName = Guid.NewGuid().ToString();
+                var extension = Path.GetExtension(file.FileName);
+
+                using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    file.CopyTo(fileStreams);
+                }
+                newPhotoblogEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + extension;
+
+                //newPhotoblogEntry.PhotoList.Last().ImageUrl = Path.Combine(uploads, filename + extension;
             }
-            // add to db, etc...
+            
+            // add to db
             _unitOfWork.PhotoblogEntry.Add(newPhotoblogEntry);
             _unitOfWork.Save();
 

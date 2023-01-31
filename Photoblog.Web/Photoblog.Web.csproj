@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Photoblog.Utils\Photoblog.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\photos\" />
+  </ItemGroup>
+
 </Project>
