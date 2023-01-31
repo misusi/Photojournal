@@ -4,6 +4,7 @@ using Photoblog.Data;
 using Photoblog.Data.Repository.IRepository;
 using Photoblog.Models;
 using Photoblog.Models.ViewModels;
+using Photojournal.Utils.CR2Converter;
 
 namespace Photoblog.Web.Areas.Admin.Controllers
 {
@@ -70,7 +71,7 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                     // convert image if cr2 + change path
                     if (extension.ToLower() == ".cr2")
                     {
-                        CR2ToJPG.Converter.ConvertImage(Path.Combine(uploads, fileName + extension), Path.Combine(uploads));
+                        Converter.ConvertImage(Path.Combine(uploads, fileName + extension), Path.Combine(uploads));
                         newJournalEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + ".jpg";
                     }
                     else

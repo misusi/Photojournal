@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace CR2ToJPG
+namespace Photojournal.Utils.CR2Converter
 {
     public static class Converter
     {
@@ -18,13 +18,13 @@ namespace CR2ToJPG
                 // Start address is at offset 0x62, file size at 0x7A, orientation at 0x6E
                 fi.Seek(0x62, SeekOrigin.Begin);
                 BinaryReader br = new BinaryReader(fi);
-                UInt32 jpgStartPosition = br.ReadUInt32();  // 62
+                uint jpgStartPosition = br.ReadUInt32();  // 62
                 br.ReadUInt32();  // 66
                 br.ReadUInt32();  // 6A
-                UInt32 orientation = br.ReadUInt32() & 0x000000FF; // 6E
+                uint orientation = br.ReadUInt32() & 0x000000FF; // 6E
                 br.ReadUInt32();  // 72
                 br.ReadUInt32();  // 76
-                Int32 fileSize = br.ReadInt32();  // 7A
+                int fileSize = br.ReadInt32();  // 7A
 
                 fi.Seek(jpgStartPosition, SeekOrigin.Begin);
 
@@ -43,7 +43,7 @@ namespace CR2ToJPG
                             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     // Image Skipped
                 }

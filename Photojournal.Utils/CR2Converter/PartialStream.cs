@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CR2ToJPG
+namespace Photojournal.Utils.CR2Converter
 {
     internal class PartialStream : Stream
     {
@@ -116,7 +116,7 @@ namespace CR2ToJPG
         public override int Read(byte[] buffer, int offset, int count)
         {
             long maxRead = Length - Position;
-            return m_f.Read(buffer, offset, (count <= maxRead) ? count : (int)maxRead);
+            return m_f.Read(buffer, offset, count <= maxRead ? count : (int)maxRead);
         }
 
         public override int ReadByte()

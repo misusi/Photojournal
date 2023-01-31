@@ -1,4 +1,4 @@
-﻿namespace CR2ToJPG
+﻿namespace Photojournal.Utils.CR2Converter
 {
     public class ConverterOptions
     {

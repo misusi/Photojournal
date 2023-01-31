@@ -16,7 +16,9 @@ namespace Photoblog.Models.ViewModels
         // Information for individual photos
         [ValidateNever]
         public List<string> PhotoUrlList { get; set; }
+        [ValidateNever]
         public float? PhotoLocationLat { get; set; }
+        [ValidateNever]
         public float? PhotoLocationLng { get; set; }
     }
 }
