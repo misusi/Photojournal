@@ -72,6 +72,8 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                     if (extension.ToLower() == ".cr2")
                     {
                         Converter.ConvertImage(Path.Combine(uploads, fileName + extension), Path.Combine(uploads));
+                        // remove old file
+                        System.IO.File.Delete(Path.Combine(uploads, fileName + extension));
                         newJournalEntry.PhotoList.Last().ImageUrl = @"\images\photos\" + fileName + ".jpg";
                     }
                     else
