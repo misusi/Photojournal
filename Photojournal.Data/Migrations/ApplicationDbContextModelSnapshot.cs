@@ -42,7 +42,7 @@ namespace Photoblog.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JournalEntries");
+                    b.ToTable("JournalEntries", (string)null);
                 });
 
             modelBuilder.Entity("Photoblog.Models.Photo", b =>
@@ -79,7 +79,7 @@ namespace Photoblog.Data.Migrations
 
                     b.HasIndex("JournalEntryId");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photos", (string)null);
                 });
 
             modelBuilder.Entity("Photoblog.Models.Photo", b =>

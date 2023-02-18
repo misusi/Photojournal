@@ -3,6 +3,7 @@ using Photoblog.Data.Repository;
 using Photoblog.Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Identity;
 //using Photoblog.Utility;
 //using Stripe;
@@ -19,33 +20,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-//builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//.AddEntityFrameworkStores<ApplicationDbContext>();
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-//    .AddDefaultTokenProviders()
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddSingleton<IEmailSender, EmailSender>();
-//builder.Services.AddAuthentication().AddFacebook(options => {
-//    options.AppId = "111111111111111";
-//    options.AppSecret = "1111111111111111";
-//});
 
-//builder.Services.ConfigureApplicationCookie(options =>
-//{
-//    options.LoginPath = $"/Identity/Account/Login";
-//    options.LogoutPath = $"/Identity/Account/Logout";
-//    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-//});
-//builder.Services.AddDistributedMemoryCache();
-//builder.Services.AddSession(options =>
-//{
-//    options.IdleTimeout = TimeSpan.FromMinutes(100);
-//    options.Cookie.HttpOnly = true;
-//    options.Cookie.IsEssential = true;
-//});
 
 var app = builder.Build();
 
@@ -68,11 +46,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
-app.UseAuthentication();
-//app.UseAuthorization();
-//app.UseSession();
+//app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",

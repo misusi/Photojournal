@@ -9,13 +9,10 @@ namespace Photoblog.Models.ViewModels
 {
     public class JournalEntryViewModel
     {
+        public JournalEntry JournalEntry { get; set; }
         // Information for the set of photos
-        public string PhotoSetTitle { get; set; }
-        public string PhotoSetDescription { get; set; }
         public DateTime? PhotoSetDate { get; set; }
         // Information for individual photos
-        [ValidateNever]
-        public List<string> PhotoUrlList { get; set; }
         [ValidateNever]
         public float? PhotoLocationLat { get; set; }
         [ValidateNever]

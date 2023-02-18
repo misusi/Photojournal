@@ -12,11 +12,12 @@
             </div>*@
          <div class="col-6">
             <form method="post" enctype="multipart/form-data">
+                <input hidden asp-for="JournalEntry.Id" />
                 <input hidden asp-for="PhotoLocationLat" type="number" step="0.00000001" id="photoLatitude" />
                 <input hidden asp-for="PhotoLocationLng" type="number" step="0.00000001" id="photoLongitude" />
                 <div class="form-group">
                     <label class="form-label mt-4">Select photos to include in this set</label>
-                    <input class="form-control" multiple type="file" id="uploadBox" name="postedFiles">
+                    <input disabled class="form-control" multiple type="file" id="uploadBox" name="postedFiles">
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">Title for this set of photos</label>
@@ -34,13 +35,20 @@
                     <span class="text-danger" asp-validation-for="PhotoSetDate"></span>
                 </div>
                 
-                <button class="btn btn-success mt-3" type="submit" onclick="return ValidateInput()">Upload PhotoSet</button>
+                <button class="btn btn-success mt-3" type="submit" onclick="return ValidateInput()">Confirm Changes</button>
             </form>
          </div>
         <!--display image thumbnails if they were selected-->
         <div class="col-6">
             <!--show map-->
-            <div style="height:600px;width:100%;" id="map"></div>
+            <div class="row" >
+            @foreach (var photo in Model.JournalEntry.PhotoList)
+            {
+                    <div class="col">
+                        <img style="height:200px;" src="@photo.ImageUrl">
+                    </div>
+            }
+            </div>
         </div>
     </div>
 </div>
@@ -48,7 +56,7 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 
-    <script>
+@*    <script>
         function ValidateInput(){
             if(document.getElementById("uploadBox").value == ""){
                 Swal.fire({
@@ -61,7 +69,7 @@
             }
             return true;
         }
-    </script>
+    </script>*@
 
     <script>
         var torontoLat = 43.7183438;

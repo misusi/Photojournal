@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var blurAmount = "0px";
+    var textColour = "rgba(255,255,255,.95)";
+    //var textColour = "rgba(255,255,255,0.9)";
+    var borderColour = textColour;
+    var textAreaBgColour = "rgba(255,255,255,0.2)";
+    var grayscaleAmount = "0";
+}
+@section head{
+    <style>
+        .page-background {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url(/images/resources/norcal_shore.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-width: 100%;
+            min-height: 100%;
+            -webkit-filter: blur(@blurAmount);
+            -o-filter: blur(@blurAmount);
+            filter: blur(@blurAmount) grayscale(@grayscaleAmount);
+            z-index: -100;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        /*footer, nav, .navbar {
+            display: none;
+        }*/
+
+/*        #defaultNav {
+            display: none;
+        }
+        footer {
+            display:none;
+        }*/
+
+        .page-panel {
+            background: @textAreaBgColour;
+            width: 100%;
+            color: @textColour;
+            border: 4px solid @borderColour;
+            margin-top: 30%;
+            padding: 35px;
+        }
+
+        .page-box{
+            background: @textAreaBgColour;
+            color: @textColour;
+            border: 4px solid @borderColour;
+            padding: 35px;
+        }
+
+        .center-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .muhBox {
+            padding:10px;
+            background: rgba(255,255,255,0.05);
+            /*filter: blur(4px);*/
+            /*border: solid black 3px;*/
+        }
+
+        /**/
+        /**/
+        .colour-changing-border {
+            /*border: 3px solid transparent;*/
+        }
+        .colour-changing-border:hover {
+            /*transition: border 1.25s;*/
+            border: 4px solid #fd004c;
+            animation: mymove 3s infinite;
+        }
+        .colour-changing-border2:hover {
+            /*transition: border 1.25s;*/
+            border: 4px solid #ffffff;
+            animation: move2 3s infinite;
+        }
+        .colour-change {
+            transition: .5s;
+        }
+        .colour-change:hover {
+            background: rgba(255,255,255,0.8);
+            color: rgba(0,0,0,0.6);
+            border: transparent 4px solid;
+            /*border: 4px solid rgba(0,0,0,0.6);*/
+        }
+
+        @@keyframes mymove {
+            0% {
+                border-color: #fd004c;
+            }
+
+            16.67% {
+                border-color: #fe9000;
+            }
+
+            33.34% {
+                border-color: #fff020;
+            }
+
+            50% {
+                border-color: #3edf4b;}
+
+
+            66.68% {
+                border-color: #3363ff;
+            }
+
+            83.35% {
+                border-color: #b102b7;
+            }
+
+            100% {
+                border-color: #fd004c;
+            }
+        }
+
+        a, a:link, a:hover, a:active {
+            text-decoration:none;
+            color: @textColour;
+        }
+
+        .edge{
+            border:1px black solid;
+        }
+
+        .content-fade-in {
+            animation: fadeInAnimation ease 2s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+          
+        @@keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+             }
+        }
+
+    </style>
+}
+
+<div class="page-background"></div>
+
+<div class="content-fade-in">
+    <div class="row center-screen" style="font-size: 22px;color:@textColour;">
+        <div class="col-6 shadow page-box align-text-top  mx-auto">
+            <div class="row">
+                <div class="col">
+                    <div>Welcome to phojo.online!</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pt-4 text-start">
+                    <div>&emsp;&emsp;This is a website that acts as a public photo journal e quel maravigliose di che che   transitorie fuor divina che della le porgiamo avvedimento come forza quegli mortali primo giudicio    viviamo e cosa noi ripararci in siamo che lodato il lodato lui oppinione e dio facitore di cosí noi fermi   divenuti che nostra prieghi</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pt-4 text-start">
+                    <div>&emsp;&emsp;Maravigliose di che che transitorie fuor divina che della le porgiamo avvedimento come     forza quegli mortali primo giudicio viviamo e cosa noi ripararci in siamo che lodato il lodato lui  oppinione e dio facitore di cosí noi fermi divenuti che nostra prieghi</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pt-4 text-end">
+                    <div>-- Michael</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <a asp-area="User" asp-controller="Home" asp-action="Login">
+                    <div class="col  shadow page-box align-text-top text-center my-5 colour-change">
+                        LOG IN
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+                <a asp-area="User" asp-controller="Home" asp-action="SignUp">
+                    <div class="col  shadow page-box align-text-top text-center my-5 colour-change">
+                        SIGN UP
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+                <a asp-area="User" asp-controller="Home" asp-action="SeeJournals">
+                    <div class="col  shadow page-box align-text-top text-center my-5 colour-change">
+                        SEE JOURNALS
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+                <a asp-area="User" asp-controller="Home" asp-action="About">
+                    <div class="col  shadow page-box align-text-top text-center my-5 colour-change">
+                        ABOUT
+                    </div>
+                </a>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+@section Scripts{
+    
+}

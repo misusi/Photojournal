@@ -42,8 +42,8 @@ namespace Photoblog.Web.Areas.Admin.Controllers
                 var uploads = Path.Combine(wwwRootPath, @"images\photos");
                 // create new photoblog entry from data in view model
                 JournalEntry newJournalEntry = new();
-                newJournalEntry.Title = journalEntryViewModel.PhotoSetTitle;
-                newJournalEntry.Description = journalEntryViewModel.PhotoSetDescription;
+                newJournalEntry.Title = journalEntryViewModel.JournalEntry.Title;
+                newJournalEntry.Description = journalEntryViewModel.JournalEntry.Description;
                 newJournalEntry.DateCreated = DateTime.Now;
                 // create new photo object for each image url included
                 foreach (var file in postedFiles)
@@ -91,6 +91,44 @@ namespace Photoblog.Web.Areas.Admin.Controllers
             return View(journalEntryViewModel);
         }
 
+        // GET
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var journalEntryFromDb = _unitOfWork.JournalEntry.GetFirstOrDefault(u => u.Id == id, 
+                includeProperties:"PhotoList");
+            if (journalEntryFromDb == null)
+            {
+                return NotFound();
+            }
+
+            // make view model from retrieved category
+            JournalEntryViewModel jevm = new();
+            jevm.JournalEntry = journalEntryFromDb;
+            jevm.PhotoLocationLng = journalEntryFromDb.PhotoList.Last().LocationTakenLng;
+            jevm.PhotoLocationLat = journalEntryFromDb.PhotoList.Last().LocationTakenLat;
+            jevm.PhotoSetDate = journalEntryFromDb.PhotoList.Last().DateTaken;
+
+            return View(jevm);
+        }
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(JournalEntryViewModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.JournalEntry.Update(obj.JournalEntry);
+                _unitOfWork.Save();
+                TempData["success"] = "Category updated successfully.";
+                return RedirectToAction("Index", "JournalEntry");
+            }
+            return View(obj);
+        }
+
         #region API_CALLS
         [HttpGet]
         public IActionResult GetAll()
@@ -99,6 +137,30 @@ namespace Photoblog.Web.Areas.Admin.Controllers
             return Json(new { data = journalEntries });
         }
 
-    }
-    #endregion
-}
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var obj = _unitOfWork.JournalEntry.GetFirstOrDefault(u => u.Id == id, includeProperties:"PhotoList");
+            if (obj == null)
+            {
+                return Json(new { success = false, message = "Error while deleting." });
+            }
+
+            // Remove images from file system
+            foreach (var photo in obj.PhotoList)
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath,
+                    photo.ImageUrl.TrimStart('\\'));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            _unitOfWork.JournalEntry.Remove(obj);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Delete Successful" });
+        }
+        #endregion
+    } //end class
+}//end namespace
