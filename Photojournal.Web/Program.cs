@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Photojournal.Models;
 //using Microsoft.AspNetCore.Identity;
 //using Stripe;
 
@@ -27,11 +28,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //    options.SignIn.RequireConfirmedAccount = true;
 //})
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
+//builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+//{
+//    options.SignIn.RequireConfirmedAccount = false;
+//})
+//    .AddRoles<IdentityRole>()
+//    .AddDefaultTokenProviders()
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddRoles<IdentityRole>()
     .AddDefaultTokenProviders() // comment disables iemailsender 2FA error for now 
-    .AddEntityFrameworkStores < ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();

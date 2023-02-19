@@ -11,6 +11,7 @@ namespace Photojournal.Data.Repository.IRepository
 	//I<ModelName>Repository ModelName { get; }
         IJournalEntryRepository JournalEntry { get; }
         IPhotoRepository Photo { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

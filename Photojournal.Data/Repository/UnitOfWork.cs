@@ -18,10 +18,13 @@ namespace Photojournal.Data.Repository
             _db = db;
             JournalEntry = new JournalEntryRepository(_db);
             Photo = new PhotoRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
 
         public IJournalEntryRepository JournalEntry { get; private set; }
         public IPhotoRepository Photo { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
         public void Save()
         {
             _db.SaveChanges();
