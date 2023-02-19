@@ -1,15 +1,14 @@
-using Photoblog.Data;
-using Photoblog.Data.Repository.IRepository;
-//using Photoblog.Models;
+using Photojournal.Data;
+using Photojournal.Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Photoblog.Models;
+using Photojournal.Models;
 
-namespace Photoblog.Data.Repository
+namespace Photojournal.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

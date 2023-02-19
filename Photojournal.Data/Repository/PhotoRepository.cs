@@ -1,12 +1,12 @@
-﻿using Photoblog.Data.Repository.IRepository;
-using Photoblog.Models;
+﻿using Photojournal.Data.Repository.IRepository;
+using Photojournal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photoblog.Data.Repository
+namespace Photojournal.Data.Repository
 {
     public class PhotoRepository : Repository<Photo>, IPhotoRepository
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photoblog.Models.ViewModels
+namespace Photojournal.Models.ViewModels
 {
     public class JournalEntryViewModel
     {

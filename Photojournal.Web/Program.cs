@@ -1,11 +1,12 @@
-using Photoblog.Data;
-using Photoblog.Data.Repository;
-using Photoblog.Data.Repository.IRepository;
+using Photojournal.Data;
+using Photojournal.Data.Repository;
+using Photojournal.Data.Repository.IRepository;
+using Photojournal.Utils;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 //using Microsoft.AspNetCore.Identity;
-//using Photoblog.Utility;
 //using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,10 +29,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddDefaultTokenProviders()
+    .AddDefaultTokenProviders() // comment disables iemailsender 2FA error for now 
     .AddEntityFrameworkStores < ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

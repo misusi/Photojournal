@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Photoblog.Data.Migrations
+namespace Photojournal.Data.Migrations
 {
     /// <inheritdoc />
     public partial class addDateCreatedColumnToPhotoblogEntry : Migration

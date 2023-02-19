@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photoblog.Data.Repository.IRepository
+namespace Photojournal.Data.Repository.IRepository
 {
     public interface IUnitOfWork
     {

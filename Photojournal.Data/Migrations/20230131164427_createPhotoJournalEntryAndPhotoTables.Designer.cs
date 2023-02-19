@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Photoblog.Data;
+using Photojournal.Data;
 
 #nullable disable
 
-namespace Photoblog.Data.Migrations
+namespace Photojournal.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230131164427_createPhotoJournalEntryAndPhotoTables")]

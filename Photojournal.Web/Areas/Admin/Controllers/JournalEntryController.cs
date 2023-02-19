@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Photoblog.Data;
-using Photoblog.Data.Repository.IRepository;
-using Photoblog.Models;
-using Photoblog.Models.ViewModels;
+using Photojournal.Data;
+using Photojournal.Data.Repository.IRepository;
+using Photojournal.Models;
+using Photojournal.Models.ViewModels;
 using Photojournal.Utils.CR2Converter;
 
-namespace Photoblog.Web.Areas.Admin.Controllers
+namespace Photojournal.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class JournalEntryController : Controller

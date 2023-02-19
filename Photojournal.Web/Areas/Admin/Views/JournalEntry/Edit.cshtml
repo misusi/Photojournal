@@ -1,8 +1,9 @@
-﻿@model Photoblog.Models.ViewModels.JournalEntryViewModel
+﻿@model Photojournal.Models.ViewModels.JournalEntryViewModel
+
 <div class="container">
     <div class="row my-3">
         <div class="col">
-            <a class="btn btn-primary">Back</a>
+            <a asp-area="Admin" asp-controller="JournalEntry" asp-action="Index" class="btn btn-primary">Back</a>
         </div>
     </div>
     <div class="row my-1">
@@ -70,6 +71,8 @@
             return true;
         }
     </script>*@
+
+    
 
     <script>
         var torontoLat = 43.7183438;

@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Photoblog.Web.Models;
+using Photojournal.Web.Models;
 
-namespace Photoblog.Web.Controllers;
+namespace Photojournal.Web.Controllers;
 [Area("User")]
 public class HomeController : Controller
 {

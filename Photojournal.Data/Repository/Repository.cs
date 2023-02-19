@@ -1,5 +1,5 @@
-using Photoblog.Data;
-using Photoblog.Data.Repository.IRepository;
+using Photojournal.Data;
+using Photojournal.Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Photoblog.Data.Repository
+namespace Photojournal.Data.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

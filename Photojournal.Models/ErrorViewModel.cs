@@ -1,4 +1,4 @@
-namespace Photoblog.Web.Models;
+namespace Photojournal.Web.Models;
 
 public class ErrorViewModel
 {
