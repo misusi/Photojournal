@@ -87,7 +87,9 @@ namespace Photojournal.Web.Areas.Admin.Controllers
                 // add to db
                 _unitOfWork.JournalEntry.Add(newJournalEntry);
                 _unitOfWork.Save();
-                return RedirectToAction("Index", "JournalEntry");
+                //return RedirectToAction("Index", "JournalEntry");
+                // needed for redirecting after ajax post
+                return Json(new { redirectToUrl = Url.Action("Index", "JournalEntry") });
             }
             return View(journalEntryViewModel);
         }

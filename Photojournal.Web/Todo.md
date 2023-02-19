@@ -5,3 +5,4 @@
 - Maps: Add search box to leaflet
 - Maps: Fix pin dropping on leaflet
 - ~~Maps: Read lat and long from map to pass to member variables~~
+- Check file upload type and size, etc.

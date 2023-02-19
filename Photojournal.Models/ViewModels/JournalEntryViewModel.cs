@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace Photojournal.Models.ViewModels
         public float? PhotoLocationLat { get; set; }
         [ValidateNever]
         public float? PhotoLocationLng { get; set; }
+        public IList<IFormFile>? postedFiles { get; set; }
     }
 }
