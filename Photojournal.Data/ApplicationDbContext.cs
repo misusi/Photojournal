@@ -14,5 +14,6 @@ namespace Photojournal.Data
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<JournalEntry> JournalEntries { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

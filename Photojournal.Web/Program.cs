@@ -29,6 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddRoles<IdentityRole>()
     .AddDefaultTokenProviders() // comment disables iemailsender 2FA error for now 
     .AddEntityFrameworkStores < ApplicationDbContext>();
 
