@@ -8,6 +8,7 @@ using Photojournal.Utils.CR2Converter;
 
 namespace Photoblog.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class JournalEntryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

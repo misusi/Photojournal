@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Photoblog.Web.Models;
 
 namespace Photoblog.Web.Controllers;
-
+[Area("User")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
